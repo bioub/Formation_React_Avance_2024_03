@@ -1,18 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PokemonCardDetails from '../components/pokemon-card-details';
 import { getPokemon } from '../services/pokemon-service';
 import { Pokemon } from '../models/pokemon';
+import { CompareContext } from '../compare-context';
+import { useNavigate } from 'react-router-dom';
 
 type Props = Readonly<{}>;
 
 function PokemonCompare({}: Props) {
+  const { idsToCompare } = useContext(CompareContext);
+  const navigate = useNavigate();
+
   const [pokemon1, setPokemon1] = useState<Pokemon | undefined>(undefined);
   const [pokemon2, setPokemon2] = useState<Pokemon | undefined>(undefined);
 
   useEffect(() => {
-    getPokemon(1).then((pokemon) => setPokemon1(pokemon));
-    getPokemon(2).then((pokemon) => setPokemon2(pokemon));
+    getPokemon(idsToCompare[0]).then((pokemon) => setPokemon1(pokemon));
+    getPokemon(idsToCompare[1]).then((pokemon) => setPokemon2(pokemon));
   }, []);
+
+  if (idsToCompare.length !== 2) {
+    navigate('/pokemons');
+    return null;
+  }
 
   return (
     <div className="PokemonCompare">
