@@ -7,14 +7,23 @@ function Exercise2() {
   const boxRef = useRef();
 
   useEffect(() => {
-    document.addEventListener('click', (event) => {
-      if (boxRef.current.contains(event.target)) {
-        setCountClickInside(countClickInside + 1);
+    console.log('addEventListener');
+
+    const listener = (event) => {
+      console.log('click');
+
+      if (boxRef.current?.contains(event.target)) {
+        setCountClickInside((c) => c + 1);
       } else {
-        setCountClickOutside(countClickOutside + 1);
+        setCountClickOutside((c) => c + 1);
       }
-    });
-  }, [countClickInside, countClickOutside]);
+    };
+    document.addEventListener('click', listener);
+
+    return () => {
+      document.removeEventListener('click', listener)
+    }
+  }, []);
 
   return (
     <div className="Exercise2">

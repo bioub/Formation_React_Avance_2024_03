@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Clock from './Clock'
+// import ExportExcel from './ExportExcel'
+
+const ExportExcel = lazy(() => import('./ExportExcel'));
 
 function App() {
   const [count, setCount] = useState(0)
-  const [showClock, setShowClock] = useState(true);
+  const [showClock, setShowClock] = useState(false);
 
   return (
     <>
@@ -30,6 +33,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <Suspense fallback={<p>Loading...</p>}>
+        {showClock && <ExportExcel />}
+      </Suspense>
       {showClock && <Clock />}
       <button onClick={() => setShowClock(!showClock)}>ON/OFF</button>
     </>
