@@ -23,7 +23,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <StrictMode>
+  // <StrictMode>
     <App />
-  </StrictMode>
+  // </StrictMode>
 );
