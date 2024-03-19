@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Clock from './Clock'
+import MultiStateButton from './MultiStateButton'
 // import ExportExcel from './ExportExcel'
 
 const ExportExcel = lazy(() => import('./ExportExcel'));
@@ -23,7 +24,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => setCount((count) => count + 1)} data-testid="counter">
           count is {count}
         </button>
         <p>
@@ -38,6 +39,7 @@ function App() {
       </Suspense>
       {showClock && <Clock />}
       <button onClick={() => setShowClock(!showClock)}>ON/OFF</button>
+      <MultiStateButton items={['Rouge', 'Vert', 'Bleu']} />
     </>
   )
 }
