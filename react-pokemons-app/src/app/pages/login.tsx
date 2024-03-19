@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { login } from '../services/authentication-service';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type Field = {
   value?: any;
@@ -13,7 +14,10 @@ type Form = {
   password: Field;
 };
 
+// t('login.message.try')
+
 function Login() {
+  const { t } = useTranslation()
   const navigate = useNavigate();
 
   const [form, setForm] = useState<Form>({
@@ -82,7 +86,7 @@ function Login() {
     event.preventDefault();
     const isFormValid = validateForm();
     if (isFormValid) {
-      setMessage('👉 Tentative de connexion en cours ...');
+      setMessage('login.message.try');
       login(form.username.value, form.password.value).then(
         (isAuthenticated) => {
           if (!isAuthenticated) {
@@ -106,7 +110,7 @@ function Login() {
                 {/* Form message */}
                 {message && (
                   <div className="form-group">
-                    <div className="card-panel grey lighten-5">{message}</div>
+                    <div className="card-panel grey lighten-5">{t(message)}</div>
                   </div>
                 )}
                 {/* Field username */}
@@ -149,7 +153,7 @@ function Login() {
               <div className="card-action center">
                 {/* Submit button */}
                 <button type="submit" className="btn">
-                  Valider
+                  {t('login.button')}
                 </button>
               </div>
             </div>

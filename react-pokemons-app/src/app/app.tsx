@@ -8,8 +8,19 @@ import Login from './pages/login';
 import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
 import { CompareProvider } from './compare-context';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 function App() {
+  const [locale, setLocale] = useState('fr');
+  const { t, i18n } = useTranslation();
+
+  function changeLocale(locale: string) {
+    i18n.changeLanguage(locale).then(() => {
+      setLocale(locale);
+    });
+  }
+
   return (
     <BrowserRouter>
       <CompareProvider>
@@ -19,6 +30,8 @@ function App() {
               <Link to="/" className="brand-logo center">
                 Pokédex
               </Link>
+              <span onClick={() => changeLocale('fr')}>Français</span>
+              <span onClick={() => changeLocale('en')}>English</span>
             </div>
           </nav>
           <Routes>

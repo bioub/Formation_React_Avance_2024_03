@@ -7,14 +7,18 @@
     "start": "vite",
     "start:api": "json-server --watch src/app/models/db.json --port=3001 --delay=500",
     "build": "tsc && vite build",
-    "test": "vitest"
+    "test": "vitest",
+    "i18n-extract": "i18next"
   },
   "private": true,
   "type": "module",
   "dependencies": {
     "classnames": "^2.5.1",
+    "i18next": "^23.10.1",
+    "i18next-xhr-backend": "^3.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "^14.1.0",
     "react-router-dom": "^6.14.1"
   },
   "devDependencies": {
@@ -22,6 +26,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
+    "i18next-parser": "^8.13.0",
     "jsdom": "^22.1.0",
     "json-server": "^0.17.3",
     "sass": "^1.55.0",

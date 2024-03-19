@@ -1,0 +1,8 @@
+{
+  "login": {
+    "button": "Valider",
+    "message": {
+      "try": "Tentative de connection"
+    }
+  }
+}

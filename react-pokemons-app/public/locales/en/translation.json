@@ -1,0 +1,8 @@
+{
+  "login": {
+    "button": "Validate",
+    "message": {
+      "try": "Trying to connect"
+    }
+  }
+}
