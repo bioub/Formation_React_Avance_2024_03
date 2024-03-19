@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Pokemon } from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
 import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
+import { CompareContext } from '../compare-context';
 
 function PokemonList() {
+  const { idsToCompare } = useContext(CompareContext);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ function PokemonList() {
       </Link>
       <Link
         className="btn-floating btn-large waves-effect waves-light blue z-depth-3"
-        style={{ position: 'fixed', bottom: '25px', right: '100px' }}
+        style={{ position: 'fixed', bottom: '25px', right: '100px', display: idsToCompare.length !== 2 ? 'none': 'block' }}
         to="/pokemon/compare"
       >
         <i className="material-icons">compare</i>
