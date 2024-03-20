@@ -1,20 +1,23 @@
-import { useState, useEffect, useContext, useMemo, useCallback } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { Pokemon } from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
-import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
 import { CompareContext } from '../compare-context';
 import List from '../components/list';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPokemons } from '../store/actions';
+import { filteredPokemonsSelector } from '../store/selectors';
 
 
 function PokemonList() {
+  const dispatch = useDispatch<any>();
+  const pokemons = useSelector(filteredPokemonsSelector);
   const { idsToCompare } = useContext(CompareContext);
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    getPokemons().then((pokemons) => setPokemons(pokemons));
+    dispatch(fetchPokemons());
   }, []);
 
   if (!isAuthenticated) {

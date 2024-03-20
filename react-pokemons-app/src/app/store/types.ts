@@ -5,8 +5,12 @@
 //   users: {},
 // };
 
+import { Pokemon } from "../models/pokemon";
+
 export type PokemonsSlice = {
   searchTerm: string;
+  items: Pokemon[],
+  loading: boolean;
 };
 
 export type UsersSlice = {};
