@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { expect, test, vitest } from "vitest";
 import MultiStateButton from "./MultiStateButton";
 
 test('MultiStateButton renders', () => {
@@ -11,17 +11,14 @@ test('MultiStateButton throws when items is empty', () => {
 });
 
 test('MultiStateButton select next value on click', () => {
-  render(<MultiStateButton items={['Rouge', 'Vert', 'Bleu']} />);
+  const callback = vitest.fn();
+
+  render(<MultiStateButton items={['Rouge', 'Vert', 'Bleu']} selected={'Bleu'} onSelected={callback} />);
 
   const button = screen.getByRole('button');
-  expect(button.innerText).toContain('Rouge');
-
-  fireEvent.click(button);
-  expect(button.innerText).toContain('Vert');
-
-  fireEvent.click(button);
   expect(button.innerText).toContain('Bleu');
 
   fireEvent.click(button);
-  expect(button.innerText).toContain('Rouge');
+  
+  expect(callback).toHaveBeenCalledWith('Rouge');
 });

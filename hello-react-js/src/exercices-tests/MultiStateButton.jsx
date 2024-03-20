@@ -1,8 +1,4 @@
-import { useState } from "react";
-
-function MultiStateButton({ items }) {
-  const [selected, setSelected] = useState(items[0]);
-
+function MultiStateButton({ items, selected, onSelected }) {
   if (!items?.length) {
     throw new Error('items must not be empty');
   }
@@ -10,7 +6,7 @@ function MultiStateButton({ items }) {
   function handleClick() {
     const currentIndex = items.indexOf(selected);
     const nextIndex = (currentIndex + 1) % items.length;
-    setSelected(items[nextIndex]);
+    onSelected(items[nextIndex]);
   }
 
   return (

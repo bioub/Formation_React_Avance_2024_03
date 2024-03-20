@@ -1,8 +1,26 @@
-# React + Vite
+# Exercice Test avec mock
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En vous inspirant de la slide 228 (pour le mock) et du test de `MultiStateButton` (pour le test de composant).
 
-Currently, two official plugins are available:
+Ecrire un test du composant `PokemonList` en remplaçant la fonction `getPokemons` d'origine par une fonction générée dans le test.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Cette fonction doit retourner une promesse (Promise) de pokemons (comme à la slide 228), par exemple :
+
+```
+[
+  {
+    id: 1,
+    name: 'Mon Faux Pokemon',
+    hp: 21,
+    cp: 4,
+    picture:
+      'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png',
+    types: ['Eau'],
+    created: new Date(),
+  },
+]
+```
+
+Vérifier que le nom du pokemon soit présent à l'écran (par exemple en utilisant un data-testid pour selecter le nom du pokemon dans la carte).
+
+

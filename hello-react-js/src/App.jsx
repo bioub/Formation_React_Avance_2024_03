@@ -3,12 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Clock from './Clock'
-import MultiStateButton from './MultiStateButton'
+import MultiStateButton from './exercices-tests/MultiStateButton'
+import PokemonList from './exercices-tests/pokemons/pokemon-list'
 // import ExportExcel from './ExportExcel'
 
 const ExportExcel = lazy(() => import('./ExportExcel'));
 
 function App() {
+  const [color, setColor] = useState('Bleu')
   const [count, setCount] = useState(0)
   const [showClock, setShowClock] = useState(false);
 
@@ -39,7 +41,9 @@ function App() {
       </Suspense>
       {showClock && <Clock />}
       <button onClick={() => setShowClock(!showClock)}>ON/OFF</button>
-      <MultiStateButton items={['Rouge', 'Vert', 'Bleu']} />
+      <MultiStateButton items={['Rouge', 'Vert', 'Bleu']} selected={color} onSelected={setColor} />
+      <PokemonList />
+    
     </>
   )
 }
