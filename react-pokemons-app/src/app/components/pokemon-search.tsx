@@ -2,26 +2,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import { searchPokemon } from '../services/pokemon-service';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchTermSelector } from '../store/selectors';
+import { updateSearchTerm } from '../store/actions';
 
-type Props =  {
-  term: string;
-  onSearch(term:string): void;
-}
 
-function PokemonSearch({ term, onSearch}: Props) {
- 
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+function PokemonSearch() {
+  const searchTerm = useSelector(searchTermSelector);
+  const dispatch = useDispatch();
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const term = event.target.value;
-    onSearch(term);
-
-    if (term.length <= 1) {
-      setPokemons([]);
-      return;
-    }
-
-    searchPokemon(term).then((pokemons) => setPokemons(pokemons));
+    dispatch(updateSearchTerm(term));
   }
 
   return (
@@ -33,20 +25,9 @@ function PokemonSearch({ term, onSearch}: Props) {
               <input
                 type="text"
                 placeholder="Rechercher un pokémon"
-                value={term}
+                value={searchTerm}
                 onChange={(e) => handleInputChange(e)}
               />
-            </div>
-            <div className="collection">
-              {pokemons.map((pokemon) => (
-                <Link
-                  key={pokemon.id}
-                  to={`/pokemons/${pokemon.id}`}
-                  className="collection-item"
-                >
-                  {pokemon.name}
-                </Link>
-              ))}
             </div>
           </div>
         </div>

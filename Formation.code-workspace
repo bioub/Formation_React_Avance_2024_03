@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "react-communication"
+		},
+		{
+			"path": "demos-redux"
 		}
 	],
 	"settings": {}

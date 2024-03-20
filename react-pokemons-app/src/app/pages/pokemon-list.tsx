@@ -10,7 +10,6 @@ import List from '../components/list';
 
 
 function PokemonList() {
-  const [term, setTerm] = useState('');
   const { idsToCompare } = useContext(CompareContext);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
@@ -30,7 +29,7 @@ function PokemonList() {
       <h1 className="center">Pokédex</h1>
       <div className="container">
         <div className="row">
-          <PokemonSearch term={term} onSearch={setTerm} />
+          <PokemonSearch />
           <List items={pokemons} renderItem={renderItem} />
         </div>
       </div>
