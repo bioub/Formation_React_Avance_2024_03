@@ -2,6 +2,8 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { getPokemons } from "../services/pokemon-service";
 
 export const updateSearchTerm = createAction<string>('pokemons/updateSearchTerm');
+export const selectId = createAction<number>('pokemons/selectId');
+
 
 // Normalement sans Redux Toolkit pour faire une requete HTTP
 // On doit créer 3 actions :

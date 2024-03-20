@@ -1,25 +1,23 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import PokemonCardDetails from '../components/pokemon-card-details';
-import { getPokemon } from '../services/pokemon-service';
-import { Pokemon } from '../models/pokemon';
-import { CompareContext } from '../compare-context';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { pokemonsToCompareSelector } from '../store/selectors';
+import { fetchPokemons } from '../store/actions';
 
 type Props = Readonly<{}>;
 
 function PokemonCompare({}: Props) {
-  const { idsToCompare } = useContext(CompareContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
 
-  const [pokemon1, setPokemon1] = useState<Pokemon | undefined>(undefined);
-  const [pokemon2, setPokemon2] = useState<Pokemon | undefined>(undefined);
+  const pokemons = useSelector(pokemonsToCompareSelector);
 
   useEffect(() => {
-    getPokemon(idsToCompare[0]).then((pokemon) => setPokemon1(pokemon));
-    getPokemon(idsToCompare[1]).then((pokemon) => setPokemon2(pokemon));
+    dispatch(fetchPokemons());
   }, []);
 
-  if (idsToCompare.length !== 2) {
+  if (pokemons.length !== 2) {
     navigate('/pokemons');
     return null;
   }
@@ -27,12 +25,11 @@ function PokemonCompare({}: Props) {
   return (
     <div className="PokemonCompare">
       <div className="row">
-        <div className="col s6">
-          <PokemonCardDetails pokemon={pokemon1} />
-        </div>
-        <div className="col s6">
-          <PokemonCardDetails pokemon={pokemon2} />
-        </div>
+        {pokemons.map((p) => (
+          <div className="col s6" key={p.id}>
+            <PokemonCardDetails pokemon={p} />
+          </div>
+        ))}
       </div>
     </div>
   );

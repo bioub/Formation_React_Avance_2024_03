@@ -11,6 +11,7 @@ export type PokemonsSlice = {
   searchTerm: string;
   items: Pokemon[],
   loading: boolean;
+  idsToCompare: number[];
 };
 
 export type UsersSlice = {};

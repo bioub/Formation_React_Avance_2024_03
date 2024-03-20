@@ -8,13 +8,14 @@ import { CompareContext } from '../compare-context';
 import List from '../components/list';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPokemons } from '../store/actions';
-import { filteredPokemonsSelector } from '../store/selectors';
+import { filteredPokemonsSelector, idsToCompareSelector } from '../store/selectors';
 
 
 function PokemonList() {
   const dispatch = useDispatch<any>();
   const pokemons = useSelector(filteredPokemonsSelector);
-  const { idsToCompare } = useContext(CompareContext);
+  const idsToCompare = useSelector(idsToCompareSelector);
+  // const { idsToCompare } = useContext(CompareContext);
 
   useEffect(() => {
     dispatch(fetchPokemons());
